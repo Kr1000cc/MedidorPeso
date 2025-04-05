@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Peso</title>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+                background-color: #f2f2f2;
+                font-family: Arial, sans-serif;
+            }
+
+            .contenedor {
+                text-align: center;
+                background-color: white;
+                padding: 30px;
+                border-radius: 15px;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            }
+
+            input,
+            button {
+                padding: 10px;
+                font-size: 16px;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                width: 200px;
+            }
+
+            #foto {
+                width: 200px;
+                transition: all 0.3s ease;
+                display: none;
+                margin-top: 20px;
+            }
+
+            @keyframes animarImagen {
+                0% {
+                    transform: rotate(0deg) scale(1) translateX(0);
+                }
+                25% {
+                    transform: rotate(10deg) scale(1.1) translateX(10px);
+                }
+                50% {
+                    transform: rotate(-10deg) scale(1.2) translateX(-10px);
+                }
+                75% {
+                    transform: rotate(10deg) scale(1.1) translateX(10px);
+                }
+                100% {
+                    transform: rotate(0deg) scale(1) translateX(0);
+                }
+            }
+
+            .animada {
+                animation: animarImagen 2s infinite ease-in-out;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="contenedor">
+            <h1>Ingresa tu peso en kg</h1>
+            <input type="text" id="peso" /><br />
+            <button onclick="verificarPeso()">Verificar</button><br />
+            <img src="fotito.png" alt="Foto" id="foto" />
+            <audio id="cancion" src="cancion.mp3" type="audio/mp3"></audio>
+        </div>
+
+        <script>
+            function verificarPeso() {
+                const pesoInput = document.getElementById("peso").value;
+                const peso = parseFloat(pesoInput);
+                const foto = document.getElementById("foto");
+                const cancion = document.getElementById("cancion");
+
+                if (peso > 70) {
+                    foto.style.display = "block";
+                    foto.classList.add("animada");
+                    cancion.play();
+                } else {
+                    foto.style.display = "none";
+                    foto.classList.remove("animada");
+                    cancion.pause();
+                    cancion.currentTime = 0;
+                }
+            }
+        </script>
+    </body>
+</html>
